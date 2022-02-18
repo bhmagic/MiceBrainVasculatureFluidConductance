@@ -1,0 +1,27 @@
+#!/bin/bash -l
+#SBATCH --account=lab_kim
+#SBATCH --partition=compute
+#SBATCH --job-name=YTW_CFD
+#SBATCH --output=GPU_XXX.%j.%N.out
+#SBATCH --error=GPU_XXX.%j.%N.err
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=44
+#SBATCH --array=0-219%35 # job array index
+
+
+#SBATCH --time=100000:00:00
+#SBATCH --mem=300000
+
+module load matlab
+
+names=($(cat job_file_list))
+brain_name=`expr ${SLURM_ARRAY_TASK_ID} / 20`
+brain_part=`expr ${SLURM_ARRAY_TASK_ID} % 20`
+brain_part=`expr ${brain_part} + 1`
+
+echo ${names[${brain_name}]}
+echo ${brain_part}
+
+rm ~/.matlab/* -rf
+matlab -nodisplay -batch "mat_name = ${names[${brain_name}]}; HPC_poking_point = ${brain_part} ; cubical_CFD_micro_fff"

@@ -3,7 +3,7 @@
 This code here is designed to using fluid dynamic simulation to estimate the permeability of the vasculature structure.   
 
 ## How to use
-There are 4 steps, and the reason is the simulation is very computationally heavy, thus the simulation part was designed to run on HPC with others parts can be finished on a workstation computer. 
+There are 3 steps, and the reason is the simulation is very computationally heavy, thus the simulation part was designed to run on HPC with others parts can be finished on a workstation computer. 
 
 Step 1:   Open *RUN_THIS_FILE.m* inside *001_Preparing* folder in Matlab.  Edit *dir_root* to locate your data folder. Run the file. The code will give you a *.mat* file named by your data folder. 
 
